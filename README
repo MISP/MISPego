@@ -55,3 +55,6 @@ Usage Notes:
   - Ensure folder has write-access permissions, so that event.db can be written.
   - Hash uses the VirusTotal Hash result
 
+Requirements:
+PyMISP https://github.com/MISP/PyMISP
+
