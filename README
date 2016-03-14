@@ -1,0 +1,57 @@
+---------------------------------------------------------------------
+---------------------------------------------------------------------
+	   __  ______________              
+	  /  |/  /  _/ __/ _ \___ ___ ____ 
+	 / /|_/ // /_\ \/ ___/ -_) _ `/ _ \
+	/_/  /_/___/___/_/   \__/\_, /\___/
+	                        /___/      
+
+	Created by: Tom King
+	Adapted from: https://github.com/MISP/MISP-maltego
+---------------------------------------------------------------------
+---------------------------------------------------------------------
+
+Maltego Transform to put entities into MISP events
+
+Adust the following variables in mispego_util.py
+
+BASE_URL = '<YOUR MISP BASE URL>'
+API_KEY = '<YOUR API KEY>'
+MISP_VERIFYCERT = False #Verify SSL Certificate or not
+MISP_DEBUG = False #Set debug for PyMISP
+MISP_EVENT_PUBLISH = <Publish T/F> #Publish event on creation
+MISP_DISTRIBUTION = <0-3> #Distribution Level
+MISP_ANALYSIS = <0-2> #Analyis Level
+MISP_THREAT = <1-4> #Threat Level
+MISP_TO_IDS = <IDS T/F> #Send to IDS
+
+There is only one main file, mispego.py, which all transforms utilise
+The following are links to this file:
+  - mispego_createEvent.py
+  - mispego_selectEvent.py
+  - mispego_addDomain.py
+  - mispego_addIP.py
+  - mispego_addEmail.py
+  - mispego_addHash.py
+
+All transforms and transform set are contained within the package "MISPego.mtz"
+After importing this, you must manage the imported transforms, changing Working
+Directory to the custom-transform location and Command Line (if using Windows etc.)
+
+The following transform set will be imported: MISPego
+
+The following transforms will be imported:
+
+[MISPego] Create Event / Creates event and returns MISPEvent containing new Event ID
+[MISPego] Select Event / Selects MISPEvent by ID as event to add attributes to
+[MISPego] Add Domain to Event / Adds domain to selected MISP Event
+[MISPego] Add IP to Event / Adds IP to selected MISP Event
+[MISPego] Add Email Address to Event / Adds email address to MISP Event
+[MISPego] Add Hash to Event / Adds md5-sha1-sha256 hash to MISP Event
+
+Usage Notes:
+  - Use Phrase to create Event, with Phrase Text => Event Description
+  - Use MISP_Event to select for insertion (This has one hour time-out protection)
+  - Ensure folder has write-access permissions, so that event.db can be written.
+  - Hash uses the VirusTotal Hash result
+
