@@ -6,7 +6,7 @@
 # Date: 09/03/2016
 ######################################################
 
-from pymisp import PyMISP
+from pymisp import PyMISP, ExpandedPyMISP, MISPEvent
 from MaltegoTransform import *
 from mispego_util import *
 from datetime import datetime, timedelta
