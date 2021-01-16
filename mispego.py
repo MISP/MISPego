@@ -6,7 +6,7 @@
 # Date: 09/03/2016
 ######################################################
 
-from pymisp import PyMISP, ExpandedPyMISP, MISPEvent
+from pymisp import PyMISP, ExpandedPyMISP, MISPEvent, MISPAttribute
 from MaltegoTransform import *
 from mispego_util import *
 from datetime import datetime, timedelta
@@ -25,20 +25,26 @@ eventDB = "event.db"
 
 def addDomain(domainValue):
     eid = checkAge()
-    event = misp.get(eid)
-    misp.add_domain(event, domainValue, to_ids=MISP_TO_IDS)
+    mispAttribute = MISPAttribute()
+    mispAttribute.type = 'domain'
+    mispAttribute.value = domainValue
+    misp.add_attribute(eid, mispAttribute)
     returnSuccess("domain",domainValue,eid)
 
 def addIP(ipValue):
     eid = checkAge()
-    event = misp.get(eid)
-    misp.add_ipdst(event, ipValue, to_ids=MISP_TO_IDS)
+    mispAttribute = MISPAttribute()
+    mispAttribute.type = 'ip-dst'
+    mispAttribute.value = ipValue
+    misp.add_attribute(eid,mispAttribute)
     returnSuccess("IP address",ipValue,eid)
 
 def addEmail(emailValue):
     eid = checkAge()
-    event = misp.get(eid)
-    misp.add_email_src(event, emailValue, to_ids=MISP_TO_IDS)
+    mispAttribute = MISPAttribute()
+    mispAttribute.type = 'email'
+    mispAttribute.value = emailValue
+    misp.add_attribute(eid, mispAttribute)
     returnSuccess("email",emailValue,eid)
 
 def addHash(hashValue):
@@ -47,16 +53,24 @@ def addHash(hashValue):
     md5 = re.compile(r'[0-9a-f]{32}$', flags = re.IGNORECASE)
     sha1= re.compile(r'[0-9a-f]{40}$', flags = re.IGNORECASE)
     sha256 = re.compile(r'[0-9a-f]{64}$', flags = re.IGNORECASE)
-    event = misp.get(eid)
     if re.match(sha256, hashValue):
         hashType = "sha256"
-        event = misp.add_hashes(event, sha256=hashValue, to_ids=MISP_TO_IDS)
+        mispAttribute = MISPAttribute()
+        mispAttribute.type = 'sha256'
+        mispAttribute.value = hashValue
+        misp.add_attribute(eid, mispAttribute)
     elif re.match(sha1, hashValue):
         hashType = "sha1"
-        event = misp.add_hashes(event, sha1=hashValue, to_ids=MISP_TO_IDS)
+        mispAttribute = MISPAttribute()
+        mispAttribute.type = 'sha1'
+        mispAttribute.value = hashValue
+        misp.add_attribute(eid, mispAttribute)
     elif re.match(md5, hashValue):
         hashType = "md5"
-        event = misp.add_hashes(event, md5=hashValue, to_ids=MISP_TO_IDS)
+        mispAttribute = MISPAttribute()
+        mispAttribute.type = 'md5'
+        mispAttribute.value = hashValue
+        misp.add_attribute(eid, mispAttribute)
     else:
         returnFailure("hash", hashValue, "length of %s" % len(hashValue))
     returnSuccess("%s hash" % hashType,hashValue,eid)
@@ -64,7 +78,17 @@ def addHash(hashValue):
 def createEvent(eventName):
     mt = MaltegoTransform()
     mt.addUIMessage("[Info] Creating event with the name %s" % eventName)
-    event = misp.new_event(MISP_DISTRIBUTION, MISP_THREAT, MISP_ANALYSIS, eventName,None,MISP_EVENT_PUBLISH)
+
+    mispevent = MISPEvent()
+    mispevent.analysis = MISP_ANALYSIS
+    mispevent.date = datetime.now()
+    mispevent.distribution = MISP_DISTRIBUTION
+    mispevent.info = eventName
+    mispevent.threat_level_id = MISP_THREAT
+    mispevent.published = MISP_EVENT_PUBLISH
+
+    event = misp.add_event(mispevent)
+
     eid = event['Event']['id']
     einfo = event['Event']['info']
     eorgc = event['Event']['orgc_id']
@@ -99,12 +123,13 @@ def checkAge():
         eid = "none"
     s.close()
     curDate = datetime.today()
-    if age < curDate - timedelta(seconds=3600):
+    if age < curDate - timedelta(seconds=86400):
         mt = MaltegoTransform()
         mt.addException("[Warning] Selection of Event is over 1 hour old. Please reselect. Current selection: %s" % eid);
         mt.throwExceptions()
     else:
         return eid
+
 def returnSuccess(etype,value,event=None, mt=None):
     if not mt:
         mt = MaltegoTransform()

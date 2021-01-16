@@ -1,1 +1,2 @@
-mispego.py
+import mispego
+mispego.main()
