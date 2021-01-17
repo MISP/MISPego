@@ -6,12 +6,14 @@
 # Date: 09/03/2016
 ######################################################
 
-from pymisp import PyMISP, ExpandedPyMISP, MISPEvent, MISPAttribute
+import re
+import shelve
+from datetime import datetime, timedelta
+
+from pymisp import PyMISP, MISPEvent, MISPAttribute
+
 from MaltegoTransform import *
 from mispego_util import *
-from datetime import datetime, timedelta
-import shelve
-import re
 
 try:
     misp =  PyMISP(BASE_URL, API_KEY, MISP_VERIFYCERT, 'json', MISP_DEBUG)
@@ -123,7 +125,7 @@ def checkAge():
         eid = "none"
     s.close()
     curDate = datetime.today()
-    if age < curDate - timedelta(seconds=86400):
+    if age < curDate - timedelta(seconds=3600):
         mt = MaltegoTransform()
         mt.addException("[Warning] Selection of Event is over 1 hour old. Please reselect. Current selection: %s" % eid);
         mt.throwExceptions()
