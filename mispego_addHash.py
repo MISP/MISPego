@@ -1,2 +1,0 @@
-import mispego
-mispego.main()

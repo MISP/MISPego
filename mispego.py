@@ -149,8 +149,16 @@ def returnFailure(etype, value, reason):
 def main():
     request = sys.argv[0].split('_')[1][:-3]
     value = sys.argv[1]
-    datatypes = {'createEvent':createEvent,'selectEvent':selectEvent,'addDomain':addDomain,
-                'addIP':addIP,'addEmail':addEmail,'addHash':addHash}
+
+    datatypes = {
+        'createEvent':createEvent,
+        'selectEvent':selectEvent,
+        'addDomain':addDomain,
+        'addIP':addIP,
+        'addEmail':addEmail,
+        'addHash':addHash
+    }
+
     if request in datatypes:
         method = datatypes.get(request)
         method(value)
