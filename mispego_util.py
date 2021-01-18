@@ -26,12 +26,12 @@ MISP_DISTRIBUTION = 0
 # 0 - Initial
 # 1 - Ongoing
 # 2 - Complete
-MISP_ANALYSIS = 2
+MISP_ANALYSIS = 1
 # THREAT LEVEL
 # 1 - High
 # 2 - Medium
 # 3 - Low
 # 4 - Undefined
-MISP_THREAT = 2
+MISP_THREAT = 4
 #MISP to IDS
 MISP_TO_IDS = True

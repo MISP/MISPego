@@ -8,6 +8,7 @@
 
 	Created by: Tom King
 	Adapted from: https://github.com/MISP/MISP-maltego
+	Updated by: Adam McHugh
 ---------------------------------------------------------------------
 ---------------------------------------------------------------------
 
@@ -25,14 +26,9 @@ MISP_ANALYSIS = <0-2> #Analyis Level
 MISP_THREAT = <1-4> #Threat Level
 MISP_TO_IDS = <IDS T/F> #Send to IDS
 
-There is only one main file, mispego.py, which all transforms utilise
-The following are links to this file:
-  - mispego_createEvent.py
-  - mispego_selectEvent.py
-  - mispego_addDomain.py
-  - mispego_addIP.py
-  - mispego_addEmail.py
-  - mispego_addHash.py
+There is only one main file, mispego.py, which all transforms utilise.
+Two command line arguments are expected as part of execution, these
+have been prepopulated in the Maltego transform export.
 
 All transforms and transform set are contained within the package "MISPego.mtz"
 After importing this, you must manage the imported transforms, changing Working
@@ -50,10 +46,11 @@ The following transforms will be imported:
 [MISPego] Add Hash to Event / Adds md5-sha1-sha256 hash to MISP Event
 
 Usage Notes:
-  - Use Phrase to create Event, with Phrase Text => Event Description
+  - Use 'Phrase' in Maltego to create Event, with Phrase Text => Event Description
+  - When starting a new graph, ensure either Create Event, or Select, else previous EventID will be reused.
   - Use MISP_Event to select for insertion (This has one hour time-out protection)
   - Ensure folder has write-access permissions, so that event.db can be written.
-  - Hash uses the VirusTotal Hash result
+  - Hash uses the VirusTotal Hash result.
 
 Requirements:
 PyMISP https://github.com/MISP/PyMISP
