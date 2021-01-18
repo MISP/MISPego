@@ -6,6 +6,7 @@
 # Date: 09/03/2016
 ######################################################
 
+import argparse
 import re
 import shelve
 from datetime import datetime, timedelta
@@ -147,8 +148,8 @@ def returnFailure(etype, value, reason):
     mt.throwExceptions()
 
 def main():
-    request = sys.argv[0].split('_')[1][:-3]
-    value = sys.argv[1]
+    request = sys.argv[1]
+    value = sys.argv[2]
 
     datatypes = {
         'createEvent':createEvent,
