@@ -7,9 +7,9 @@
 ######################################################
 
 # MISP BASE URL
-BASE_URL = 'YOUR_BASE_URL'
+BASE_URL = 'https://misp.maleficentlab.com/'
 # API KEY
-API_KEY = 'YOUR_API_KEY'
+API_KEY = 'g4T4dhGzgzuMTfI2Vm7yT1wZuB9GKX3D0ILNxCTD'
 # MISP_VERIFYCERT
 MISP_VERIFYCERT = False
 # pyMISP DEBUG
@@ -26,7 +26,7 @@ MISP_DISTRIBUTION = 0
 # 0 - Initial
 # 1 - Ongoing
 # 2 - Complete
-MISP_ANALYSIS = 1
+MISP_ANALYSIS = 0
 # THREAT LEVEL
 # 1 - High
 # 2 - Medium
