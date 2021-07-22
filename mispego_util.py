@@ -7,9 +7,9 @@
 ######################################################
 
 # MISP BASE URL
-BASE_URL = 'https://misp.maleficentlab.com/'
+BASE_URL = 'https://misp.redacted.com/'
 # API KEY
-API_KEY = 'g4T4dhGzgzuMTfI2Vm7yT1wZuB9GKX3D0ILNxCTD'
+API_KEY = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
 # MISP_VERIFYCERT
 MISP_VERIFYCERT = False
 # pyMISP DEBUG
