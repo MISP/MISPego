@@ -1,3 +1,6 @@
 *.pyc
 event.db
 mispego_util.py
+/event.db.bak
+/event.db.dat
+/event.db.dir

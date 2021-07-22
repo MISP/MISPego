@@ -50,6 +50,22 @@ def addEmail(emailValue):
     misp.add_attribute(eid, mispAttribute)
     returnSuccess("email",emailValue,eid)
 
+def addBIC(bicValue):
+    eid = checkAge()
+    mispAttribute = MISPAttribute()
+    mispAttribute.type = 'bic'
+    mispAttribute.value = bicValue
+    misp.add_attribute(eid, mispAttribute)
+    returnSuccess("Bank Account", bicValue, eid)
+
+def addFullName(fullnameValue):
+    eid = checkAge()
+    mispAttribute = MISPAttribute()
+    mispAttribute.type = 'first-name'
+    mispAttribute.value = fullnameValue
+    misp.add_attribute(eid, mispAttribute)
+    returnSuccess("Full Name", fullnameValue, eid)
+
 def addHash(hashValue):
     eid = checkAge()
     hashValue = hashValue.strip()
@@ -157,7 +173,9 @@ def main():
         'addDomain':addDomain,
         'addIP':addIP,
         'addEmail':addEmail,
-        'addHash':addHash
+        'addHash':addHash,
+        'addBIC':addBIC,
+        'addFullName':addFullName
     }
 
     if request in datatypes:

@@ -1,0 +1,10 @@
+<TransformSet name="MISPego" description="Transforms to submit entities to MISP">
+   <Transforms>
+      <Transform name="MISPego.AddDomaintoEvent"/>
+      <Transform name="MISPego.AddEmailtoEvent"/>
+      <Transform name="MISPego.AddHashtoEvent"/>
+      <Transform name="MISPego.AddIPtoEvent"/>
+      <Transform name="MISPego.CreateEvent"/>
+      <Transform name="MISPego.SelectEvent"/>
+   </Transforms>
+</TransformSet>
