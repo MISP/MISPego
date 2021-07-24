@@ -7,9 +7,9 @@
 ######################################################
 
 # MISP BASE URL
-BASE_URL = 'YOUR_BASE_URL'
+BASE_URL = 'https://misp.redacted.com/'
 # API KEY
-API_KEY = 'YOUR_API_KEY'
+API_KEY = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
 # MISP_VERIFYCERT
 MISP_VERIFYCERT = False
 # pyMISP DEBUG
@@ -26,12 +26,12 @@ MISP_DISTRIBUTION = 0
 # 0 - Initial
 # 1 - Ongoing
 # 2 - Complete
-MISP_ANALYSIS = 2
+MISP_ANALYSIS = 0
 # THREAT LEVEL
 # 1 - High
 # 2 - Medium
 # 3 - Low
 # 4 - Undefined
-MISP_THREAT = 2
+MISP_THREAT = 4
 #MISP to IDS
 MISP_TO_IDS = True
